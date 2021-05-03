@@ -1,4 +1,4 @@
-package racingcar;
+package racingcar.entity;
 
 import java.util.Objects;
 

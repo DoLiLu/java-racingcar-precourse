@@ -1,7 +1,6 @@
 package racingcar.entity;
 
 import racingcar.util.Generator;
-import racingcar.util.RandomGenerator;
 
 import java.util.Objects;
 
@@ -33,6 +32,10 @@ public class RacingCar {
 
     public int carPosition() {
         return carPosition;
+    }
+
+    public String carName() {
+        return carName;
     }
 
     @Override

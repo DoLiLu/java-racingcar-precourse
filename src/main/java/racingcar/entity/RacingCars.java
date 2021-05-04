@@ -1,8 +1,8 @@
 package racingcar.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import racingcar.util.Generator;
+
+import java.util.*;
 
 public class RacingCars {
     private final List<RacingCar> racingCars;
@@ -38,5 +38,45 @@ public class RacingCars {
     @Override
     public int hashCode() {
         return Objects.hash(racingCars);
+    }
+
+    public void race(Generator generator) {
+        for (RacingCar racingCar : racingCars) {
+            racingCar.move(generator);
+        }
+    }
+
+    public List<String> winners() {
+        List<String> winners = new ArrayList<>();
+        int maxPosition = winnerPosition();
+
+        for (RacingCar racingCar : racingCars) {
+            addWinners(winners, maxPosition, racingCar);
+        }
+
+        return winners;
+    }
+
+    private void addWinners(List<String> winners, int maxPosition, RacingCar racingCar) {
+        if (racingCar.carPosition() == maxPosition) {
+            winners.add(racingCar.carName());
+        }
+    }
+
+    private int winnerPosition() {
+        int maxPosition = 0;
+
+        for (RacingCar racingCar : racingCars) {
+            maxPosition = maxPosition(maxPosition, racingCar);
+        }
+
+        return maxPosition;
+    }
+
+    private int maxPosition(int maxPosition, RacingCar racingCar) {
+        if (racingCar.carPosition() > maxPosition) {
+            maxPosition = racingCar.carPosition();
+        }
+        return maxPosition;
     }
 }

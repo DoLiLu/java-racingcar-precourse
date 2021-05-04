@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import racingcar.entity.RacingCar;
 import racingcar.util.AlwaysMoveGenerator;
 import racingcar.util.Generator;
+import racingcar.util.NoneMoveGenerator;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -45,5 +46,15 @@ public class RacingCarTest {
         racingCar.move(new AlwaysMoveGenerator());
 
         assertThat(racingCar.carPosition() == 1).isTrue();
+    }
+
+
+    @Test
+    @DisplayName("자동차 정지")
+    public void racingCarStop() {
+
+        racingCar.move(new NoneMoveGenerator());
+
+        assertThat(racingCar.carPosition() == 0).isTrue();
     }
 }

@@ -35,11 +35,11 @@ public class ResultView {
         Position carPosition = racingCar.carPosition();
         StringBuilder carPositionPrint = new StringBuilder();
 
-        int index = 0;
+        int value = 0;
 
-        while(carPosition.comparePosition(index)) {
+        while (carPosition.positionBiggerThanValue(value)) {
             carPositionPrint.append(CAR_POSITION_PRINT_SYMBOL);
-            index ++;
+            value++;
         }
 
         return carPositionPrint.toString();

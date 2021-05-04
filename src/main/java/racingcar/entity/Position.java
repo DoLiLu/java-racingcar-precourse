@@ -13,7 +13,7 @@ public class Position {
         return new Position(position + 1);
     }
 
-    public boolean comparePosition(int value) {
+    public boolean positionBiggerThanValue(int value) {
         return position > value;
     }
 

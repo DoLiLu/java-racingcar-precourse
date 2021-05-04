@@ -27,19 +27,6 @@ public class RacingCars {
         return racingCars;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RacingCars that = (RacingCars) o;
-        return Objects.equals(racingCars, that.racingCars);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(racingCars);
-    }
-
     public void race(Generator generator) {
         for (RacingCar racingCar : racingCars) {
             racingCar.move(generator);
@@ -78,5 +65,23 @@ public class RacingCars {
             maxPosition = racingCar.carPosition();
         }
         return maxPosition;
+    }
+
+    public List<RacingCar> racingCars() {
+        return Collections.unmodifiableList(racingCars);
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RacingCars that = (RacingCars) o;
+        return Objects.equals(racingCars, that.racingCars);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(racingCars);
     }
 }

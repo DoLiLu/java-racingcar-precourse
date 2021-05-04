@@ -5,22 +5,21 @@ import racingcar.util.Generator;
 import java.util.*;
 
 public class RacingCars {
+    public static final int CAR_START_POINT = 0;
+    private static final String CAR_NAME_SPLIT = ",";
+
     private final List<RacingCar> racingCars;
 
     public RacingCars(String racingCars) {
         this.racingCars = carNameSplit(racingCars);
     }
 
-    public RacingCars(List<RacingCar> racingCars) {
-        this.racingCars = racingCars;
-    }
-
     private List<RacingCar> carNameSplit(String racingCarNames) {
         List<RacingCar> racingCars = new ArrayList<>();
-        String[] carNames = racingCarNames.split(",");
+        String[] carNames = racingCarNames.split(CAR_NAME_SPLIT);
 
         for (String carName : carNames) {
-            RacingCar racingCar = new RacingCar(carName.trim(), 0);
+            RacingCar racingCar = new RacingCar(carName.trim(), CAR_START_POINT);
             racingCars.add(racingCar);
         }
 
@@ -35,16 +34,17 @@ public class RacingCars {
 
     public List<String> winners() {
         List<String> winners = new ArrayList<>();
-        int maxPosition = winnerPosition();
 
         for (RacingCar racingCar : racingCars) {
-            addWinners(winners, maxPosition, racingCar);
+            addWinners(winners, racingCar);
         }
 
         return winners;
     }
 
-    private void addWinners(List<String> winners, int maxPosition, RacingCar racingCar) {
+    private void addWinners(List<String> winners, RacingCar racingCar) {
+        int maxPosition = winnerPosition();
+
         if (racingCar.carPosition() == maxPosition) {
             winners.add(racingCar.carName());
         }
@@ -70,7 +70,6 @@ public class RacingCars {
     public List<RacingCar> racingCars() {
         return Collections.unmodifiableList(racingCars);
     }
-
 
     @Override
     public boolean equals(Object o) {

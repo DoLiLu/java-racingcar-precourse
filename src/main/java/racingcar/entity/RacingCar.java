@@ -26,7 +26,7 @@ public class RacingCar {
 
     public void move(Generator generator) {
         if (generator.generate() > RACING_CAR_MOVE_POSSIBLE_VALUE) {
-            this.carPosition ++;
+            this.carPosition++;
         }
     }
 

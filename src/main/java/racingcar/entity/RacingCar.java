@@ -10,9 +10,15 @@ public class RacingCar {
     private static final int CAR_NAME_MAX_LENGTH = 5;
 
     private final String carName;
-    private int carPosition;
+    private Position carPosition;
 
     public RacingCar(String carName, int carPosition) {
+        validateCarName(carName);
+        this.carName = carName;
+        this.carPosition = new Position(carPosition);
+    }
+
+    public RacingCar(String carName, Position carPosition) {
         validateCarName(carName);
         this.carName = carName;
         this.carPosition = carPosition;
@@ -26,11 +32,15 @@ public class RacingCar {
 
     public void move(Generator generator) {
         if (generator.generate() > RACING_CAR_MOVE_POSSIBLE_VALUE) {
-            this.carPosition++;
+            this.carPosition = carPosition.nextPosition();
         }
     }
 
-    public int carPosition() {
+    public boolean isPositionEqual(Position position) {
+        return carPosition.isPositionEqual(position);
+    }
+
+    public Position carPosition() {
         return carPosition;
     }
 
@@ -43,7 +53,7 @@ public class RacingCar {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RacingCar racingCar = (RacingCar) o;
-        return carPosition == racingCar.carPosition && Objects.equals(carName, racingCar.carName);
+        return Objects.equals(carName, racingCar.carName) && Objects.equals(carPosition, racingCar.carPosition);
     }
 
     @Override

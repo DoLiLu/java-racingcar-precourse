@@ -1,5 +1,6 @@
 package racingcar.view;
 
+import racingcar.entity.Position;
 import racingcar.entity.RacingCar;
 import racingcar.entity.RacingCars;
 
@@ -31,11 +32,14 @@ public class ResultView {
     }
 
     private static String carPositionPrintString(RacingCar racingCar) {
-        int carPosition = racingCar.carPosition();
+        Position carPosition = racingCar.carPosition();
         StringBuilder carPositionPrint = new StringBuilder();
 
-        for (int i = 0; i < carPosition; i++) {
+        int index = 0;
+
+        while(carPosition.comparePosition(index)) {
             carPositionPrint.append(CAR_POSITION_PRINT_SYMBOL);
+            index ++;
         }
 
         return carPositionPrint.toString();

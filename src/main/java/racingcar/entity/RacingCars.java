@@ -19,7 +19,7 @@ public class RacingCars {
         String[] carNames = racingCarNames.split(CAR_NAME_SPLIT);
 
         for (String carName : carNames) {
-            RacingCar racingCar = new RacingCar(carName.trim(), CAR_START_POINT);
+            RacingCar racingCar = new RacingCar(carName.trim(), new Position(CAR_START_POINT));
             racingCars.add(racingCar);
         }
 
@@ -43,28 +43,25 @@ public class RacingCars {
     }
 
     private void addWinners(List<String> winners, RacingCar racingCar) {
-        int maxPosition = winnerPosition();
+        Position maxPosition = winnerPosition();
 
-        if (racingCar.carPosition() == maxPosition) {
+        if (racingCar.carPosition().isPositionEqual(maxPosition)) {
             winners.add(racingCar.carName());
         }
     }
 
-    private int winnerPosition() {
-        int maxPosition = 0;
+    private Position winnerPosition() {
+        Position maxPosition = new Position(0);
 
         for (RacingCar racingCar : racingCars) {
-            maxPosition = maxPosition(maxPosition, racingCar);
+            maxPosition = maxPosition(maxPosition, racingCar.carPosition());
         }
 
         return maxPosition;
     }
 
-    private int maxPosition(int maxPosition, RacingCar racingCar) {
-        if (racingCar.carPosition() > maxPosition) {
-            maxPosition = racingCar.carPosition();
-        }
-        return maxPosition;
+    private Position maxPosition(Position maxPosition, Position carPosition) {
+        return maxPosition.maxPosition(carPosition);
     }
 
     public List<RacingCar> racingCars() {

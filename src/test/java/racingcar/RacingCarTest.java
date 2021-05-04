@@ -3,6 +3,7 @@ package racingcar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.entity.Position;
 import racingcar.entity.RacingCar;
 import racingcar.util.AlwaysMoveGenerator;
 import racingcar.util.NoneMoveGenerator;
@@ -15,9 +16,11 @@ import static racingcar.entity.RacingCars.CAR_START_POINT;
 public class RacingCarTest {
 
     private RacingCar racingCar;
+    private Position carPosition;
 
     @BeforeEach
     void setup(){
+        carPosition = new Position(CAR_START_POINT);
         racingCar = new RacingCar("Test", CAR_START_POINT);
     }
 
@@ -26,7 +29,7 @@ public class RacingCarTest {
     public void createRacingCar() {
         String carName = "Test";
 
-        assertThat(racingCar.equals(new RacingCar(carName, CAR_START_POINT))).isTrue();
+        assertThat(racingCar.equals(new RacingCar(carName, carPosition))).isTrue();
     }
 
     @Test
@@ -44,7 +47,7 @@ public class RacingCarTest {
 
         racingCar.move(new AlwaysMoveGenerator());
 
-        assertThat(racingCar.carPosition() == 1).isTrue();
+        assertThat(racingCar.isPositionEqual(new Position(1))).isTrue();
     }
 
 
@@ -54,6 +57,6 @@ public class RacingCarTest {
 
         racingCar.move(new NoneMoveGenerator());
 
-        assertThat(racingCar.carPosition() == 0).isTrue();
+        assertThat(racingCar.isPositionEqual(new Position(0))).isTrue();
     }
 }
